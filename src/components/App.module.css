@@ -5,6 +5,12 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 16px;
+  
+    /* align-items: center;
+    align-self: center;
+    /* display: flex;
+    flex-wrap: wrap;
+    flex-g */ 
     padding-bottom: 24px;
   }
   
