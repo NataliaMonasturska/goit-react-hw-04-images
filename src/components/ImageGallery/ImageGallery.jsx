@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { ImageGalleryItem} from 'components/ImageGalleryItem/ImageGalleryItem';
 import css from './ImageGallery.module.css'
 
 
-export class ImageGallery extends Component {
 
-    
-    
 
-    render () {
+
+export const ImageGallery = ({images}) => {
 
         return (
             <ul className= {css.ImageGallery}>
-                 {this.props.images.map(image => (
+                 {images.map(image => (
              <ImageGalleryItem 
              key = {image.id}
              url = {image.webformatURL} 
@@ -24,7 +22,7 @@ export class ImageGallery extends Component {
         );
     }
   
-  };
+  
   
 //   ImageGallery.propTypes = {
 //     onChangeFilter: PropTypes.func.isRequired,
