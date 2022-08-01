@@ -32,7 +32,7 @@ async getUser() {
   try {
     const response = await axios.get(`https://pixabay.com/api/?key=${MY_API_KEY}&q=${this.state.value}&image_type=photo&orientation=horizontal&safesearch=true&per_page=12&page=${this.state.page}`);
     // console.log(response.data.hits);
-    this.setState((prevState) => ({images: response.data.hits, page: prevState.page + 1}))
+    this.setState((prevState) => ({images: [...prevState.images, ...response.data.hits], page: prevState.page + 1}))
     // if (response.data.hits.length === 0) {
     //      Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
     // }
@@ -67,6 +67,7 @@ async getUser() {
 
   handleLoadMore = (event) => {
     event.preventDefault();
+    
     this.getUser();
   }
 
