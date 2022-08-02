@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import css from './ImageGalleryItem.module.css'
 
-export const ImageGalleryItem = ({ url, alt }) => {
+export const ImageGalleryItem = ({ url, alt, openModal, id }) => {
     return (
-        <li className= {css.ImageGalleryItem}>
+        <li className= {css.ImageGalleryItem} onClick={() => openModal(id)}>
         <img src={url} alt={alt} className={css.ImageGalleryItem_image } />
         </li>
     );

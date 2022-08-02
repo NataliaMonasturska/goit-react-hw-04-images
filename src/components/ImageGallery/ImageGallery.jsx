@@ -7,15 +7,17 @@ import css from './ImageGallery.module.css'
 
 
 
-export const ImageGallery = ({images}) => {
+export const ImageGallery = ({images, openModal}) => {
 
         return (
             <ul id="ImageGallery" className= {css.ImageGallery}>
                  {images.map(image => (
              <ImageGalleryItem 
+             openModal={openModal}
              key = {image.id}
              url = {image.webformatURL} 
-             alt = {image.tags}/>
+             alt = {image.tags}
+             id = {image.id} />
         ))}
            
           </ul>

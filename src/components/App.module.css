@@ -13,4 +13,10 @@
     flex-g */ 
     padding-bottom: 24px;
   }
+
+  .Loader{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
   

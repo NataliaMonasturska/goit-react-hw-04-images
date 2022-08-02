@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { Button } from 'components/Button/Button';
-import * as Scroll from 'react-scroll';
+import { Modal } from 'components/Modal/Modal';
 import css from './App.module.css';
+import { RotatingLines } from 'react-loader-spinner';
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 const axios = require('axios');
 const Scrolling = require('react-scroll');
 const scroll = Scrolling.animateScroll;
@@ -26,10 +28,16 @@ export class App extends Component {
     value: '',
     page: 1,
     isLoading: false,
+    isShowModal: false,
+    ImageForModal: {url: "", alt: ""}
   };
 
   componentDidUpdate(_, prevState) {
-    if (prevState.value !== this.state.value || prevState.page !== this.state.page) {
+    if (
+      prevState.value !== this.state.value ||
+      prevState.page !== this.state.page
+    ) {
+      this.setState({isLoading: true});
       this.getUser();
     }
   }
@@ -38,7 +46,7 @@ export class App extends Component {
     const { height: cardHeight } = document
       .querySelector('#ImageGallery')
       .firstElementChild.getBoundingClientRect();
-    scroll.scrollMore(cardHeight * 2);
+    scroll.scrollMore(cardHeight * 3.2);
   };
 
   async getUser() {
@@ -49,6 +57,7 @@ export class App extends Component {
       // console.log(response.data.hits);
       this.setState(prevState => ({
         images: [...prevState.images, ...response.data.hits],
+        isLoading: false
       }));
 
       // if (response.data.hits.length === 0) {
@@ -74,27 +83,57 @@ export class App extends Component {
       // }
     } catch (error) {
       console.error(error);
+      this.setState({ isLoading: false});
     }
   }
 
   recordsValueInputForm = value => {
-    this.setState({ value, page: 1 });
+    this.setState({ value, page: 1, images: [], isLoading: true });
   };
 
-  handleLoadMore = event => {
+  handleLoadMore = () => {
     // event.preventDefault();
-    this.setState(prevState => ({ page: prevState.page + 1 }));
+    this.setState(prevState => ({ page: prevState.page + 1, isLoading: true }));
     // this.getUser();
     this.scroll();
   };
+
+  openModal = (id) => {
+    console.log(id);
+    const image = this.state.images.find((image) => image.id === id)
+    console.log(image);
+    if(image){
+      this.setState({ImageForModal: {url: image.largeImageURL, alt: image.tags},  isShowModal: true, })
+    }
+ 
+  }
+  closeModal = () => {
+    this.setState({ isShowModal: false})
+  }
+
+
 
   render() {
     return (
       <div className={css.App}>
         <Searchbar onSubmit={this.recordsValueInputForm} />
-        <ImageGallery images={this.state.images} />
+        <ImageGallery images={this.state.images} openModal={this.openModal } />
         {this.state.images.length > 0 && (
           <Button onClick={this.handleLoadMore} />
+        )}
+        {this.state.isLoading && (
+          <div className={css.Loader}>
+            <RotatingLines
+              strokeColor="#3f51b5"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="150"
+              visible={true}
+            />
+          </div>
+        )}
+        {this.state.isShowModal && (
+          <Modal url={this.state.ImageForModal.url} alt={this.state.ImageForModal.alt} />
         )}
       </div>
     );
