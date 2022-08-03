@@ -1,22 +1,13 @@
-/*
- * Стили компонента App
- */
- .App {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 16px;
-  
-    /* align-items: center;
-    align-self: center;
-    /* display: flex;
-    flex-wrap: wrap;
-    flex-g */ 
-    padding-bottom: 24px;
-  }
+.App {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
 
-  .Loader{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
+  padding-bottom: 24px;
+}
+
+.Loader {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
