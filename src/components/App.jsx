@@ -20,6 +20,7 @@ export class App extends Component {
     isLoading: false,
     isShowModal: false,
     ImageForModal: { url: '', alt: '' },
+    total: 0 
   };
 
   componentDidUpdate(_, prevState) {
@@ -47,6 +48,7 @@ export class App extends Component {
       this.setState(prevState => ({
         images: [...prevState.images, ...response.data.hits],
         isLoading: false,
+        total: response.data.total
       }));
     } catch (error) {
       console.error(error);
@@ -82,7 +84,7 @@ export class App extends Component {
       <div className={css.App}>
         <Searchbar onSubmit={this.recordsValueInputForm} />
         <ImageGallery images={this.state.images} openModal={this.openModal} />
-        {this.state.images.length > 0 && (
+        {this.state.images.length >= 12 && this.state.images.length < this.state.total && (
           <Button onClick={this.handleLoadMore} />
         )}
         {this.state.isLoading && (
