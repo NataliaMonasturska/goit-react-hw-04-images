@@ -57,7 +57,10 @@ export class App extends Component {
   }
 
   recordsValueInputForm = value => {
-    this.setState({ value, page: 1, images: [], isLoading: true });
+   if(value === this.state.value){
+    return
+   }
+   this.setState({ value, page: 1, images: [], isLoading: true });
   };
 
   handleLoadMore = () => {
