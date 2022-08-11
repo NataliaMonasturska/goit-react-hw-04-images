@@ -2,7 +2,11 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
+<<<<<<< HEAD
   "homepage": "https://NataliaMonasturska.github.io/goit-react-hw-03-image-finder/",
+=======
+  "homepage": "https://NataliaMonasturska.github.io/goit-react-hw-04-images/",
+>>>>>>> 99fd7d643d5f1a405546f4bbef126e3d3101c16e
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
