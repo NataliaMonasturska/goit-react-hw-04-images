@@ -6,6 +6,7 @@ import css from './ImageGallery.module.css';
 export const ImageGallery = ({ images, openModal }) => {
   return (
     <ul id="ImageGallery" className={css.ImageGallery}>
+    
       {images.map(image => (
         <ImageGalleryItem
           openModal={openModal}
